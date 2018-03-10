@@ -79,7 +79,7 @@
             } else {
 
                 var div = document.createElement("div")
-                var result = document.createTextNode(usernumber + strike + "S" + ball + "B");
+                var result = document.createTextNode(usernumber + "\u00A0" + strike + "S"+"\u00A0" + ball + "B");
                 div.appendChild(result);
 
                 var element = document.getElementById("result")
