@@ -1,4 +1,4 @@
-#JS interview.1
+# JS interview.1
 
 
 
@@ -26,7 +26,7 @@
 **interesting case**
 <pre><code>
 	" " == "0"   	    //false
-    0 == " "             //true 
+        0 == " "             //true 
 	0 == "0"             //true
 
 	false == "false"     //false
