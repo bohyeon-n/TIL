@@ -13,6 +13,7 @@
 5.이 과정을 J 배열의 숫자만큼 반복한다. 
 
 6.최종적으로 주얼리의 값을 반환해준다.
+
 ```
 function numJewelsInStones(J, S) {
         var J = J.split("")
@@ -36,6 +37,7 @@ function numJewelsInStones(J, S) {
 
 ----------------------------------------------------------------------------------------
 #### algorithm2
+
 ```
 function numJewelsInStones(J, S) {
         var J = J.split("");
@@ -55,7 +57,8 @@ function numJewelsInStones(J, S) {
     }
 
     console.log(numJewelsInStones("aA", "aAAbbbb"));
-    ```
+```
+    
  ----------------------------------------------------------------------------------
 #### algorithm3
 
@@ -98,7 +101,7 @@ function numJewelsInStones(J, S) {
 
 
     console.log(numJewelsInStones("aA", "aAAbbbb"));
-    ```
+ ```
     
 **문자열은 내부적으로 배열이기 때문에 split을 쓰지 않아도 된다.**  
 
