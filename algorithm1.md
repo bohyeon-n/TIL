@@ -1,4 +1,4 @@
-# Find maximum in array algorithm 
+## Find maximum in array algorithm 
 -------------------------------------------
 
 
