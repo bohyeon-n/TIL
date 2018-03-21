@@ -56,6 +56,22 @@ Enter file in which to save the key (/Users/koobohyeon/.ssh/id_rsa):`
 + 오류메세지
  `failed: No such file or directory`
  
+ + ssh-keygen 은 초기실행으로 한 번만 실행해야됨 
+
+ + 혼자 실습 과정에서 이미 git repository를 만들어버림 
+
+ + git push -u origin master
+ + 이것만 입력 하기 
+
+ + 입력하기 전에 커밋을 해야 함 
+ + git add 
+ + git commit -m ""
+ + git push -u origin master
+ + git push 
+ push 완료 
+
+ 
+
 
 
 
