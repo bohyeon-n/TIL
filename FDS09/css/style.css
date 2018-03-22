@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+*, *::before, *::after{
+  margin: 0;
+  padding: 0;
+  box-sizing:  border-box;
+}
+
+body{
+  background-color: #ff0;
+}
+.main{
+  background-color: #fcf;
+  display: grid;
+  grid-template-columns: 35% 40% 25%;
+  grid-template-rows:  150px 150px;
+ /*grid-template-areas: "book     news      "
+                       "board    twitter     site"*/
+
+  grid-gap: 50px;
+
+}
+.main section{
+  background-color: #3fc;
+}
+
+.recommend-book{
+  grid-area: book;
+  grid-column: 1;
+  grid-row: 1;
+
+}
+.news{
+  grid-area: news;
+  grid-column: 2/4;
+  grid-row: 1;
+}
+.board{
+  grid-area: board;
+  grid-row: 2;
+  grid-column: 1;
+}
+.favorite-site{
+  grid-area: site;
+  grid-row: 2;
+  grid-column: 3;
+}
+.twitter{
+  grid-area: twitter;
+  grid-row: 2;
+  grid-column: 2; 
+}
