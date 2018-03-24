@@ -11,7 +11,7 @@
 
 + 함수 안에서 var을 쓰지 않고 선언하게 되면 전역변수가 된다.
 
-```
+```javascript
  var vscope = "global"
  function fscope () {
   var vscope = "local"
@@ -25,7 +25,7 @@
 
 #### 전역변수의 사용 
 
-```
+```javascript
 var myapp ={}
 myapp.calculator = {
 "left":null
@@ -47,7 +47,7 @@ function sum(){
 젼역 변수인 myapp을 사용하여 sum을 출력할 수 있게된다.
 여기서 전역변수를 사용하고 싶지 않다면 익명함수를 호출할 수 있다.  
 
-```
+```javascript
 (function(){var myapp ={}
 myapp.calculator = {
 "left":null
@@ -80,7 +80,7 @@ for문이나 if문의 중괄호 안에서 선언된 변수는 지역변수로서
 자바스크립트는 함수가 선언된 시점에서의 유효범위를 갖는다. 
 이러한 유효범위의 방식을 정적유효범위(static scoping, lexical scoping)라고 한다. 
 
-```
+```javascript
 var i = 5;
 function a(){
 var i = 10;

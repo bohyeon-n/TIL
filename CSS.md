@@ -24,9 +24,12 @@
 
  ##### selector 와 porperty 가 무엇인지 안다는 것 
  
-+ **++a++(selector)** {
-**++color++(property) : ++red++(value) ;** 
+```
+a(selector) {
+color(property) : red(value) ;
 }
+
+```
 
 + **각각이 의미하는 것을 알게 된다는 것은 무엇을 모르는지 알게 된다.**
 

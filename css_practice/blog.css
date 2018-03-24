@@ -1,0 +1,69 @@
+*, *::before, *::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  background-color: white;
+}
+.container {
+  height: 100vh;
+  background-color: gray; 
+}
+.header, .main, .slogan{
+  width: 1000px;
+  margin: 0 auto;
+}
+.header{
+  background-color:yellow;
+
+}
+.navigation{
+  background-color: teal;
+  position: fixed;
+}
+.main{
+  background-color: pink;
+  height: 60vh;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between center;
+}
+.main section{
+  background-color:green;
+  height: 20vh;
+}
+.latest-post{
+  width: 900px;
+  text-align: center;
+
+}
+.categori1{
+  width: 700px ;
+}
+.categori2{
+  width: 300px;
+}
+.categori3{
+  width:500px;
+}
+.categori4{
+  width:500px;
+}
+.slogan{
+  background-color: red;
+  height:10vh;
+  text-align: justify;
+
+}
+.footer{
+  background-color:orange;
+  height: 10vh;
+}
+
+/* slogan의 넓이가 조절이 안 됨.
+navigation을 사이드에 배치하고 싶었는데 잘 안됨 
+다시 찾아볼것! */
+
