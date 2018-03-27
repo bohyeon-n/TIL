@@ -1,7 +1,10 @@
 @font-face {
+  /* 이름을 정해준것임 밑 속성의 폰트 이름 아무거나 정해도 됨  */
   font-family: 'Noto Sans Regular';
   font-style: normal;
+  /* 보통 400 */
   font-weight: 400;
+  /* 사용자가 이 끌꼴을 설치하지 않았으면 eot파일 렌더링 / woff도 제공 모던브라우저라고 할지라도 제공하는 폰트가 다름 /otf/ 다양한 형식의 폰트를 제공해야 됨  */
   src: local('Noto Sans Regular'), local('NotoSans-Regular'), url('font/eot/NotoSansKR-Regular-Hestia.eot'), url('font/eot/NotoSansKR-Regular-Hestia.eot?#iefix') format('embedded-opentype'), url('font/woff/NotoSansKR-Regular-Hestia.woff') format('woff'), url('font/otf/NotoSansKR-Regular-Hestia.otf') format('opentype');
 }
 @font-face {

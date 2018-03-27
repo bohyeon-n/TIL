@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+.fix{
+    background: yellow;
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    width: 200px;
+}

@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Web Cafe</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type ="text/css" href="css/style.css">
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <h1 class="logo"><a href="#"><img src="images/logo.png" alt="Web Cafe"></a></h1>
+        <header class="header clearfix">
+            <h1 class="logo"><a href="#"><img src="images/rwd-logo.png" alt="Web Cafe"></a></h1>
             <ul class="member">
                 <li>
                     <a href="#">로그인</a>
@@ -25,20 +25,22 @@
             <form action="javascript:alert('검색이 완료되었습니다.');" class="search">
                 <fieldset>
                     <legend>검색 폼</legend>
-                    <label for="search">검색어</label>
+                    <label for="search" class = "search ally-hidden">검색어</label>
                     <input type="search" id="search" required placeholder="검색어를 입력하세요">
                     <button type="submit" class="btn-search">검색</button>
                 </fieldset>
                 
             </form>
         </header>
+
         <nav class="navigation">내비게이션</nav>
-        <main class="main">
+        <main class="main clearfix">
             <section class="recommend-book">추천 서적</section>
             <section class="news">새소식</section>
             <section class="board">게시판</section>
             <section class="favorite-site" style="background: red">인기 사이트</section>
             <section class="twitter">트위터</section>
+            <!-- <div class = "clear"></div> -->
         </main>
         <article class="slogan">슬로건</article>
         <footer class="footer">푸터</footer>
