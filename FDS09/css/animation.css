@@ -1,0 +1,64 @@
+@charset "utf-8";
+/* transition 애니매이션 효과 */
+.box{
+  background-color: yellow;
+  border: 5px solid #000;
+  width: 300px;
+  height: 300px;
+  /* text-align: center;
+  line-height: 300px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 500ms;
+
+}
+.box:hover{
+  border-radius: 50% 0 50% 0 ;
+  /* transform: rotate(360deg);  */
+  /* transform: translateX(50px); */
+  /* X 축 방향으로  */
+  /* transform: skewX(15deg); */
+  /* 다른 것에는 영향을 안주고 그냥 늘어남  */
+  /* transform: scale(1.2); */
+  /* 속기법 트랜지션이 있기 때문에 중간과정이 보이는 것임 아니면 결과만 보임 */
+  transform: rotate(360deg) translate(50px) scale(1.2);
+}
+/* css3 애니매이션 규칙  form to 를 백분율로 설정할 수도 있다.*/
+@keyframes text-ani{
+  0%{
+    font-size: 20px;
+    transform: translate(0,0);
+  }
+100%{
+  font-size: 40px;
+  transform: translate(500px, 150px);
+}
+}
+.text{
+  width: 800px;
+  margin: 50px auto;
+  height: 300px;
+  border: 5px solid #000 ;
+  background-color: pink;
+
+}
+.inner{
+  /* inline 은 라인하이트의 영향을 받게됨 */
+  display: inline-block;
+  background-color: aqua;
+  animation: text-ani 3000ms forwards infinite alternate ease-in-out;
+  /* animation-name: text-ani;
+  animation-duration: 3000ms; */
+  /* 기본값이 백워즈임 포워즈하면 종료점으로 보여줄 것인가 시작점으로 돌아갈 것인가 */
+  /* animation-fill-mode: forwards;
+  animation-delay: 0s;
+  animation-iteration-count: infinite; */
+  /* 부드러운 애니매이션을 만들고 싶으면 디렉션을 잘 조절해야됨 */
+  /* animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-play-state: paused; */
+}
+
+
+

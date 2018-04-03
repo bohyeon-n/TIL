@@ -1,4 +1,4 @@
-# Find maximum in array algorithm 
+# 1.Find maximum in array algorithm 
 
 + Algorithm 
 
@@ -26,7 +26,7 @@ console.log(maximumValue)
 
 -------------------------------------------------------
 
-# Jewels and Stones
+# 2.Jewels and Stones
 
 + Algorithm1
 
@@ -159,11 +159,9 @@ function numJewelsInStones(J, S) {
 
 
     console.log(numJewelsInStones("aA", "aAAbbbb"));
-    ```
+```
 
------------------------------------------------------------
-
-# Judge Route Circle
+# 3.Judge Route Circle
 
 + algorithm 
 
@@ -212,10 +210,89 @@ function judgeCircle(moves) {
 ```
 -----------------------------------------------
 
- # 재귀함수와 반복문을 이용하여 fibonacci수열 구현하기 
+# 4.역삼각형 출력하기 
+[문제보기](https://programmers.co.kr/learn/challenge_codes/113)
 
-+ 재귀함수를 이용하여 fibonacci수열 구현하기 
-1. 
+```javascript 
+function printReverseTriangle(num){
+    var result = "";
+    for(i=num; i>0; i--){
+        result = result.concat("*".repeat(i)+"\n");
+    }
+    return result
+}
+```
+1. num의 수 만큼 *을 result 변수에 concat 한다. 
+2. num-1의 수 만큼 *을 result 변수에 concat한다. 
+3. result가 0보다 클 때까지만 반복한다. 
+
+## issue
+
+result = result.concat(~~~)
+이렇게 기존 string 을 변경하는 식으로 하면 수가 커질수록 더 무거워진다. 다 만들고 마지막에 합치는 것이 더 좋다. 
+
+```javascript
+function printReverseTriangle(num){
+    var result = [];
+    for(i = num; i>0; i--){
+       result.push("*".repeat(i));
+    }
+    var resultstr = result.join("\n");
+    return resultstr 
+}
+```
+
+**join()**
++ 배열의 모든 요소를 연결하여 하나의 문자열로 만든다.
++ 구분자를 넣을 수 있음 
++ 기본값은 , 이다 
++ string.split() 매서드와 반대되는 기능이다. 
+
+---------------------------------------------
+## push와 concat의 차이
+
+### push()
++ push는 둘 이상의 요소를 합칠 때 사용한다. 
+    
+```javascript
+var a = ["a","b","c"];
+var b = ["d","e","f"];
+
+a.push(b)
+
+console.log(a)
+// ["a","b","c",["d","e","f"]]
+```
++ 변수 a배열에 b배열을 push 한다.
++ 변수 a가 변화한 것을 볼 수 있다. 
++ 또한 변수 b를 하나의 요소로 보기 때문에 b를 push한 a의 길이는 4가 된다. 
+
+### concat()
+
++ concat은 둘 이상의 배열을 합칠 때 사용한다. 
+
+```javascript
+var a = ["a","b","c"];
+var b = ["d","e","f"];
+
+console.log(a.concat(b));
+//["a", "b", "c", "d", "e", "f"]
+console.log(a)
+//["a", "b", "c"]
+```
++ concat매소드를 사용하여 배열 a에 b를 concat하면 배열과 배열이 합쳐진다. 
++ 기존에 있던 a변수에 영향을 주지 않는다. 
+
+### push vs concat
+
++ push 매서드가 concat매서드보다 더 빠르게 계산된다. 
++ 둘의 차이점을 이해하고 필요에 따라 적절하게 사용해야 한다. 
+
+------------------------------------------------
+
+# 5. fibonacci수열 구현하기 
+
++ 재귀함수를 이용하여 fibonacci수열 구현하기  
 
 ```javascript
 function fibonacci (num){
@@ -229,6 +306,8 @@ function fibonacci (num){
 
 }
 ```
+
+
 + 반복문을 사용하여 fibonacci수열 구현하기 
 
 ```javascript

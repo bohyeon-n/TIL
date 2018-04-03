@@ -112,7 +112,6 @@ clear: inherit;
 
 [float를 clear하는 방법]( http://naradesign.net/wp/2008/05/27/144/)
 
-
 ## 4.Grid 
 
 ### 4-1 grid property
@@ -156,6 +155,7 @@ header::after{
   + absolute를 쓰고 싶다면 위치하고 싶은 부모에 position: relative 를 써줘야 원하는 위치에 배치할 수있다. 
 + fixed
   + 특정 element를 스크롤로부터 독립되게 한다.
++ sticky
 
 
 ## 6. 숨김 콘텐츠 

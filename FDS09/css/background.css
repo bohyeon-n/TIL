@@ -1,0 +1,58 @@
+@charset "utf-8";
+@import url("reset.css");
+
+.body{
+  font-size: 1.5rem;
+}
+
+/* header */
+.header{
+  height: 100px;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 1px 5px 0 #999;
+  position: sticky;
+  top: 0;
+}
+.brand{
+  font-size: 2rem;
+
+}
+.menu{
+  display: flex;
+
+}
+.menu a{
+  text-decoration: none;
+  font-size: 1em;
+  padding: 0.5em;
+  margin-left: 0.5em;
+
+}
+/* section */
+section{
+  height: 50vh;
+
+}
+.normal{
+  background: url("../images/normal.jpg") no-repeat 0 0 fixed;
+}
+.small{
+  background: #ff0;
+}
+.large{
+  background: #f0f;
+}
+.mideum{
+  /* 슬래쉬 뒤에 나오는 속성은 백그라운드 크기 속성  */
+  background: url("../images/medium.jpg") no-repeat 0 0 /100% fixed;
+}
+/* footer */
+.footer{
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  box-shadow: inset, 0 -1px 5px 0 #999; 
+}
