@@ -5,22 +5,34 @@
   border: 0;
   box-sizing: border-box; 
 } 
+legend, .a11y-hidden{
+
+   width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute; 
+  clip:rect(0, 0, 0, 0);
+  background: lime;
+
+}
 .container{
   width: 1000px;
   margin: 0 auto;
+  background: pink;
 }
 .header{
-  height: 100px;
-  top:0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+ 
+
 }
-.logo{
+fieldset{
+  float: right;
 
 }
 .logo img{
-  width: 30%;
+  width: 5%;
+ 
+  float: left;
 }
 .search{
 

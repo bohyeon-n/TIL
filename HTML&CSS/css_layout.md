@@ -112,6 +112,12 @@ clear: inherit;
 
 [float를 clear하는 방법]( http://naradesign.net/wp/2008/05/27/144/)
 
+### 3-4 float를 사용하여 두 개의 자식 요소를 배치하는 방법 
+ + li 요소 안에 a 태그와 time 태그가 있으면 time태그에  float: right를 준다. a 태그는 inline 요소이기 때문에 부모의 높이를 잃어버리지 않게 된다. 
+ + clear할 필요가 없다. 
+ 
+
+
 ## 4.Grid 
 
 ### 4-1 grid property

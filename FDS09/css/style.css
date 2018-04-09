@@ -1,245 +1,715 @@
 @charset "utf-8";
 @import url("./normalize.css");
 @import url("fonts.css");
+
 /* 일단 선언만 해준것임 밑에서 다시 font-family 선언해줘야됨 */
+
 /* 초기화 스타일  */
-*, *::before, *::after{
-    margin: 0; 
-    padding: 0; 
-    border: 0;
-    box-sizing: border-box; 
-} 
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
 /* 숨김 콘텐츠 */
- legend, .a11y-hidden{
-    /* 보조장치가 읽어주지 않음 display: none; */
-    /* 권장하지 않음 visibility: hidden; */
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    margin: -1px;
-    position: absolute;
-    clip: rect(0,0,0,0); 
-    /* font-size: 0; 
+
+legend,
+.a11y-hidden {
+  /* 보조장치가 읽어주지 않음 display: none; */
+  /* 권장하지 않음 visibility: hidden; */
+  width: 1px;
+  height: 1px;
+  background: lime;
+  overflow: hidden;
+  margin: -1px;
+  position: absolute;
+  clip: rect(0 0 0 0);
+  /* font-size: 0; 
     line-height: 0;  */
- }
-ul{
-    list-style-type: none;
-    
 }
 
-a{  
-    color: inherit;
-    text-decoration: none;
-} 
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+/* clearfix */
+
+.clearfix::after {
+  content: "";
+  /* background-color:yellow; */
+  display: block;
+  clear: both;
+}
+
 /* 기본스타일 */
-html{
-    font-size: 10px;
-}
-body{
-    background-color: #fff;
-    color: #181818;
-    font-size: 1.4rem;
-    font-family: 'Noto Sans Regular' , snas-serif; 
-    
 
+html {
+  font-size: 10px;
 }
-/* grid toggle button */
-.btn-grid{
-    position: fixed;
-    top: 2em;
-    right: 2em;
-    background: #000;
-    color: #fff;
-    padding: 1em;
-    border-radius: 5px;
+/*공통선언한 먼저 선언한 다음에 디바이스상태에 따라서  */
+body {
+  /* background-color: #fff; */
+  color: #181818;
+  font-family: "Noto Sans Regular", snas-serif;
+}
 
+.sub-menu {
+  margin-top: 0.5em;
 }
-/* 컨테이너 */
-.container{
 
-    /* height: 100vh; */
-    /* background: gray; */
-   
+.sub-menu li {
+  margin: 0.5em 0 0.5em 1em;
+}
 
-position: relative;
+.sub-menu a {
+  display: block;
+  padding: 0.5em 0;
 }
-.is-act::before{
-    background: repeating-linear-gradient(90deg, hsla(70, 90%, 60%,0.4) 0,
-     hsla(70,90%,60%,0.4) 65px,
-     transparent 65px, 
-     transparent 85px );
-    content: "";
-    position: absolute;
-    width: 1000px;
-    height: 100%;
-    z-index: 100; 
-    left: 50%;
-    /* margin-left: -500px;  */
-    transform: translateX(-50%);
+.main-section-heading {
+  background: url("./images/sprite_main.png") no-repeat;
+  padding: 5px 0 0 65px;
+  min-height: 60px;
+  margin: 1em 0;
 }
-/* 레이아웃 공통 */
-.header , .main, .slogan{
-    width: 1000px;
-    margin: 0 auto;
+.recommend-book-cover img {
+  max-width: 100%;
+  height: auto;
 }
-/* 헤더 */
-.header{
-    background-color: #fff;
-    padding: 0 0 10px 0;
-    position: relative;
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 30% 70%;
-    -ms-grid-rows: 50px 50px;
-    grid-template-columns: repeat(12, 65px);
-    grid-template-rows: 50px 50px;
-    grid-column-gap: 20px;
- }
- 
-  /* header::after{
+
+.recommend-book-cover {
+  margin: 1em auto;
+  text-align: center;
+  width: 75%;
+}
+
+.recommend-book-heading .en-heading {
+  color: #abd375;
+}
+
+.recommend-book-detail {
+  text-align: center;
+  margin: 1em 0;
+}
+
+.recommend-book-author,
+.recommend-book-author-name {
+  display: inline-block;
+}
+
+.recommend-book-summary {
+  line-height: 1.5;
+}
+
+.recommend-book-grade {
+  color: #abd375;
+  font-size: 2em;
+}
+/* 새소식 */
+
+
+
+/* 새소식 제목 */
+
+.news-heading {
+  height: 60px;
+  background-position: 0 -230px;
+}
+
+.en-heading {
+  display: block;
+  /* color:  */
+}
+
+.news-video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 새소식 날짜 정보 */
+
+.news-date {
+  display: block;
+  text-align: right;
+}
+/* 게시판 */
+
+
+
+/* 게시판 제목 */
+
+.board-heading {
+  background-position: 0 -115px;
+  margin-bottom: 0.5em;
+}
+
+.board-heading .en-heading {
+  color: #c7b39a;
+}
+
+/* 게시판 목록 */
+
+.board-list {
+  background: pink;
+  /* display: inline-block; */
+}
+
+/* .board-list li::after{
     content:"";
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: repeating-linear-gradient(to right, rgba(255, 0, 0, 0.2), rgba(255, 0, 0, 0.2) 65px, transparent 65px, transparent 85px);
-    width: 100%;
-    height: 100%;
- }  */
+    clear:both;
+    display:block;
+}  */
 
-/* 로고 */
-.logo{
-    /* background-color:blue; */
-    /* float: left; */  
-    margin: 0;
-    /* padding: 1em; */
+.board-list li {
+  background: lime;
+  margin: 0.5em 0;
+  padding: 0.5em 0;
+}
 
-     /* 붕 뜨게 하려니까 크기가 필요해서 크기가 생김 블록의 성격을 유지하면서 크기정보가 없으니까 커텐츠 크기만큼
-     플로트 주면 다 블록으로 성격이 변함   */
-    /* position: absolute; */
-    /* top: 50%;
-    left: 50px;
-    margin-top: -17%; */
-    /* transform: translateY(-50%); */
-    -ms-grid-column: 1;
-    -ms-grid-column-span: 2;
-    -ms-grid-row: 1;
-    -ms-grid-row-span: 3;
-    grid-column: 1/ span 3 ;
-    grid-row: 1 / span 2 ;
-    background: white;
+.board-list a,
+.board-list time {
+  vertical-align: middle;
+}
+
+.board-list a {
+  background: orange;
+  /* display: inline; */
+  display: inline-block;
+  width: calc(100% - 100px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.board-list time {
+  background: teal;
+  /* float: right; */
+}
+
+.board-more {
+  position: absolute;
+  top: 1.5em;
+  right: -0.5em;
+  padding: 0.5em;
+}
+
+.board-more::before {
+  color: #abd375;
+}
+
+.favorite-site-heading {
+  background-position: 0 -345px;
+}
+
+.favorite-site-heading .en-heading {
+  color: #eea60a;
+}
+
+/* 인기사이트 */
+
+
+
+.favorite-site-list {
+  overflow: hidden;
+}
+
+/* 구조선택자를 이용하여 목록 만들기 비합리적임.  */
+
+/* .favorite-site-list li:nth-child(1)::before{
+    content: "1";
+}
+.favorite-site-list li:nth-child(2)::before{
+    content: "2";
+}
+.favorite-site-list li:nth-child(3)::before{
+    content: "3";
+}
+.favorite-site-list li:nth-child(4)::before{
+    content: "4";
+}
+  */
+
+/* number변수에 담음 변수의 이름은 아무거나 상관이 없음 */
+
+.favorite-site-list li {
+  counter-increment: number;
+  margin: 1em 0;
+}
+
+.favorite-site-list li::before {
+  content: counter(number, decimal);
+  background: #eea60a;
+  color: #fff;
+  border-radius: 50%;
+  padding: 0 0.5em;
+  margin-right: 0.5em;
+}
+
+/* 트위터 */
+
+
+.twitter-heading {
+  background-position: 0 -460px;
+}
+
+.twitter-heading .en-heading {
+  color: #6aaee6;
+}
+
+/* 트위터 사용자 정보 */
+
+.twitter-user-info {
+  float: left;
+  margin-bottom: 1em;
+  width: calc(100% - 150px);
+}
+
+/* 트위터 사용자 이미지 */
+
+.twitter-profile {
+  float: right;
+  margin: 0 0 0.5em 1em;
+}
+
+.twitter-thumbnail {
+  border-radius: 50%;
+  padding: 0.5em;
+  border: 1px solid #333;
+}
+
+.twitter-summary {
+  background: orange;
+}
+
+.twitter-user-name,
+.twitter-user-id {
+  float: left;
+}
+
+.twitter-date {
+  display: block;
+  text-align: right;
+  clear: both;
+}
+
+/* .twitter-profile img{
+    background: skyblue;
+    float: right;
+} */
+
+
+/* 모바일 디바이스 */
+@media screen and (max-width: 999px){
+body{
+    font-size: 1.6rem;
+  }
+  /* 모바일 컨테이너 */
+  .container{
     position: relative;
+  }
+ /* 모바일 헤더 */
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    }
-
-    .logo a, .logo img,  {
-        display: block;
-        /* line-height: 1; */
-    }
-/* 멤버 링크 */
+.header{
+  /* 멤버에 안주고 헤더에 배경색을 줌  */
+  background: #38302e;
+  padding: 0 1em;
+  display: flex;
+  /* 순서를 바꾸기 위해 플렉스를 줌 내부적으로 오더같은 속성을 줄 수 있게 됨. */
+  flex-direction: column;
+  padding-bottom: 1em;
+}
+/* .logo, .member,.search{
+  padding: 0.5em 0;
+} */
+.logo{
+ 
+  /* 마진때문에 위아래가 떨어져 보이니까 0으로 줬음  */
+  margin: 0;
+  padding-top: 0.5em 0 0.25em;
+}
 .member{
-    /* background-color: aqua; */
-    /* li는 그냥 흘러가는거고 부모요소에 텍스트 align을 써줘야됨 */
-    /* text-align: right; */
-    /* float: right; */
-    /* font-size: 0; */
-    /* position: relative;   */
-    /* right: -10px;
-    margin-bottom: 10px; */
-    /* display: flex; */
-    grid-column: 10/span 3; 
-    grid-row: 1 / 2 ;
-    /* 누군가의 아이템이면서 누군가의 부모가됨 */
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    justify-content: space-between;
-    background: white;
+  background:#988574;
+  order: -1;
+  display: flex;
+  justify-content: flex-end;
+  color:#fff;
+  margin: 0 -1em;
+  padding: 0.25em 0;
 }
-
-.member li{
-    /* display: inline; */
-    /* background-color: violet; */
-    /* font-size: 1rem; */
-    /* float: left; */
-  
-}
-/* a에 주면 그 부분도 선택할 수 있는 영역이 됨. */
-/* .member li::before {
-    content: "|";
-
-/* }  */
-/* .member li a  */
 .member a{
-    /* background-color:tan; */
-      /* padding: 10px 0 10px 20px; */
-    /* display: inline-block; */
-    /* margin-left: 1px; */
-    display: inline-block;
-    
-
+display: block;
+padding: 0.5em 1em;
 }
-.member a:hover{
-    color: red;
+.member a:hover, .member a:focus{
+  /* 구분선같은 사용성을 줬음  */
+  color: #ffc;
 }
-/* 검색폼 */
-
-.search {
-   /* background-color: aqua; */
-    /* clear: both; */
-    /* float: right; */
-    /* text-align: right; */
-    /* margin-top: 10px; */
-    grid-column: 5 / span 8;
-    grid-row:2/3;
-    background: white;
-    display: flex;
-    justify-content: flex-end;
-   
-
-}
-
-.search fieldset{
-    border:0;
-    margin: 0;
-    padding:0;
-    /* position: relative;
-    top: 15px; 
-    left: 10px; */
-
-}
-input[type="search"]{
-    height: 35px;
-    width: 420px;
-    padding: 2px 2px 2px 10px;
-    border: 1px solid #666;
-    /* 둥근모서리 css3 */
-    border-radius: 5px;
-    font-size: 1em;
-    
-}
-#search:active{
-
-    border-color: blue;
-
+input[type='search']{
+  width: calc(100% - 40px);
+  height: 30px;
+  border: 1px solid #666;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 1px 1px 1px 1em;
 }
 .btn-search{
-    height: 30px;
-    width: 60px;
-    color: #fff;
-    border: 1px solid #666;
-    background-color: #988574;
-    border-radius: 5px;
-    font-size: 1em;
-    padding: 5px;
+  width:30px;
+  height: 30px;
+  position: relative;
+  background: transparent;
+}
+.btn-search::after{
+  position: absolute;
+  top:0;
+  left:0;
+  content: "";
+  /* 사이즈 조절해서 100%로로 써줌 30px에 맞게 줄어들 수 있도록 */
+  background: url("./images/btn_search.png") no-repeat 0 0 /100%;
+  /* 호환이 안될 수 있으므로 속기법으로  사이즈는 분리하는 습관을 들이는 것도 좋음 */
+  background-size: 100%;
+  width: 100%;
+  height: 100%;
+  border:0;
+  padding:0;
+
+}
+/* 트위터 */
+
+
+.twitter-heading {
+  background-position: 0 -460px;
 }
 
-/* 내비게이션 */
-.navigation{
-    /* background-color: #988574;
+.twitter-heading .en-heading {
+  color: #6aaee6;
+}
+
+/* 트위터 사용자 정보 */
+
+.twitter-user-info {
+  float: left;
+  margin-bottom: 1em;
+  width: calc(100% - 150px);
+}
+
+/* 트위터 사용자 이미지 */
+
+.twitter-profile {
+  float: right;
+  margin: 0 0 0.5em 1em;
+}
+
+.twitter-thumbnail {
+  border-radius: 50%;
+  padding: 0.5em;
+  border: 1px solid #333;
+}
+
+.twitter-summary {
+  background: orange;
+}
+
+.twitter-user-name,
+.twitter-user-id {
+  float: left;
+}
+
+.twitter-date {
+  display: block;
+  text-align: right;
+  clear: both;
+}
+/* 모바일 내비게이션 */
+/* 버튼 콘트롤을 선택한다.  */
+.btn-menubar{
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  position: absolute;
+  top: 4em;
+  right: 2em;
+  /* 밖으로 나온 버거바 감추기 */
+  overflow: hidden;
+  cursor: pointer;
+}
+/* span tag임 */
+.menubar{ 
+  background: #fff;
+  position: absolute;
+  left:0;
+  height:20%; 
+  width:100% ;
+  border-radius: 10px;
+  transition: all 200ms; 
+}
+.menubar-top{
+  top:0;
+}
+
+.is-act .menubar-top{
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* is act가 있는 경우의 메뉴바 미들이 선택됨 */
+.menubar-middle{
+  /* 음수마진이나 트랜스폼을 사용하여 중간으로 배치할 수 있다. 유연하게 반응형으로 음수마진을 쓰면 5px을 뺴야함*/
+  top:50%;
+  transform: translateY(-50%);
+}
+
+.is-act .menubar-middle{
+ transform: translate(-100%, -50%); 
+}
+.menubar-bottom{
+  top:100%;
+  transform: translateY(-100%);
+}
+.is-act .menubar-bottom{
+  top:50%;
+  transform: translateY(-50%) rotate(-45deg);
+  
+}
+
+
+/* 모바일 메인 메뉴 */
+.menu{
+  z-index: 100;
+  position: fixed;
+  top:0;
+  left:0;
+  color:#fff;
+  background: rgba(0,0,0, .85);
+  width: 70%;
+  width: 70vw;
+  height: 100vh;
+}
+.is-act .menu{
+  transform: translateX(0);
+}
+/* 모바일 메인 메뉴 */
+.menu{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.85);
+  color: #fff;
+  width: 70vw;
+  height: 100vh;
+  transform: translateX(-100%);
+  transition: all 200ms;
+  padding: 50px;
+}
+.is-act .menu{
+  transform: translateX(0);
+}
+.menu-item{
+  display: block;
+  cursor: pointer;
+  padding: .5em 0;
+  margin: .5em 0;
+}
+.sub-menu{
+  display: none;
+  list-style-type: disc;
+  margin-left: 3em;
+}
+.sub-menu a{
+  display: block;
+  padding: .5em 0;
+  margin: .5em 0;
+}
+/* 추가 설명 필요 */
+.board{
+    position: relative;
+}
+
+.board{
+  position: relative;
+ }
+
+
+
+.main[class$="-summary"] {
+  line-height: 1.5;
+  margin: 1em 0;
+}
+
+}
+
+
+
+
+ 
+
+/* 데스크탑 디바이스 */
+
+
+@media screen and (min-width: 1000px){
+  body{
+    font-size: 1.4rem;
+  }
+  /* 데스크탑 레이아웃 공통 */
+
+.header,
+.main,
+.slogan {
+  width: 1000px;
+  margin: 0 auto;
+}
+/* 헤더 */
+
+.header {
+  background-color: #fff;
+  padding: 0 0 10px 0;
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 30% 70%;
+  -ms-grid-rows: 50px 50px;
+  grid-template-columns: repeat(12, 65px);
+  grid-template-rows: 50px 50px;
+  grid-column-gap: 20px;
+}
+.logo {
+  /* background-color:blue; */
+  /* float: left; */
+  margin: 0;
+  /* padding: 1em; */
+  /* 붕 뜨게 하려니까 크기가 필요해서 크기가 생김 블록의 성격을 유지하면서 크기정보가 없으니까 커텐츠 크기만큼
+     플로트 주면 다 블록으로 성격이 변함   */
+  /* position: absolute; */
+  /* top: 50%;
+    left: 50px;
+    margin-top: -17%; */
+  /* transform: translateY(-50%); */
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 3;
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 2;
+  background: white;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ 
+.logo a,
+.logo img {
+  display: block;
+  /* line-height: 1; */
+}
+
+.member {
+  /* background-color: aqua; */
+  /* li는 그냥 흘러가는거고 부모요소에 텍스트 align을 써줘야됨 */
+  /* text-align: right; */
+  /* float: right; */
+  /* font-size: 0; */
+  /* position: relative;   */
+  /* right: -10px;
+    margin-bottom: 10px; */
+  /* display: flex; */
+  grid-column: 10 / span 3;
+  grid-row: 1 / 2;
+  /* 누군가의 아이템이면서 누군가의 부모가됨 */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+}
+.member a {
+  /* background-color:tan; */
+  /* padding: 10px 0 10px 20px; */
+  /* display: inline-block; */
+  /* margin-left: 1px; */
+  display: inline-block;
+}
+
+.member a:hover {
+  color: red;
+}
+.search {
+  /* background-color: aqua; */
+  /* clear: both; */
+  /* float: right; */
+  /* text-align: right; */
+  /* margin-top: 10px; */
+  grid-column: 5 / span 8;
+  grid-row: 2/3;
+  background: white;
+  display: flex;
+  justify-content: flex-end;
+}
+/* 검색폼 */
+.search fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  /* position: relative;
+    top: 15px; 
+    left: 10px; */
+}
+
+input[type="search"] {
+  height: 35px;
+  width: 420px;
+  padding: 2px 2px 2px 10px;
+  border: 1px solid #666;
+  /* 둥근모서리 css3 */
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+#search:active {
+  border-color: blue;
+}
+.menu span {
+  display: block;
+  cursor: pointer;
+  font-size: 1.8rem;
+  padding: 0.5em 0;
+  font-family: "Noto Sans Bold", sans-serif;
+  text-shadow: 0px 1px 0 #000, 1px 0px 0 #000, 0 -1px 0 #0000, -1px 0 0 #000;
+  /* 속기법 */
+  transition: all 5s ease;
+  /* transition-property: color, font-size;
+    transition-duration: 3000ms, 5000ms; */
+  /* 순차적으로 애니매이션을 주고 싶을 때 쓴다. */
+  /* transition-delay: 0s, 5s; */
+  /* 가속과 감속에 대한것  */
+  /* transition-timing-function: cubic-bezier(.69,-0.26,.83,.67); */
+  /* 시간정보 앞에는 듀레이션타임 두 번째는 딜레이타임임 딜레이 타임은 생략할 수 있기 때문에 */
+  /* transition: color 0.5s 0s cubic-bezier(.69,-0.26,.83,.67), font-size 0.5s 0.5s cubic-bezier(.69,-0.26,.83,.67); */
+}
+.menu span:hover,
+menu li:focus span {
+  color: #ff0;
+  font-size: 2rem;
+}
+.btn-search {
+  height: 30px;
+  width: 60px;
+  color: #fff;
+  border: 1px solid #666;
+  background-color: #988574;
+  border-radius: 5px;
+  font-size: 1em;
+  padding: 5px;
+}
+.navigation {
+  /* background-color: #988574;
      height: 10vh; 
     background-image: url("../images/normal.jpg");
     사이즈 조절해서 다 나오게할 수 있음 
@@ -262,90 +732,227 @@ input[type="search"]{
     background-size: 200px, 300px;
     background-attachment: scroll, scroll;
     background-image: linear-gradient(45deg, red, blue); */
-    /* background-image: radial-gradient(circle at 70% 30%,green 50%, red 50%); */
-    /* background-image: repeating-linear-gradient(90deg red, red 10%, blue 10%, blue 20%); */
-    /* background-image: repeating-radial-gradient(green 50px, yellow 100px); */
-    background-color: #988574;
-    border-top: 2px solid #000;
-    border-bottom: 2px solid #000;
-    padding-top: 0.5em;
-
-
+  /* background-image: radial-gradient(circle at 70% 30%,green 50%, red 50%); */
+  /* background-image: repeating-linear-gradient(90deg red, red 10%, blue 10%, blue 20%); */
+  /* background-image: repeating-radial-gradient(green 50px, yellow 100px); */
+  background-color: #988574;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  padding-top: 0.5em;
 }
-.menu{
-
-    width: 1000px;
-    margin: 0 auto;
-    color: #fff;
-    display: flex;
+.menu {
+  width: 1000px;
+  margin: 0 auto;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+}
+.main {
+  /*background-color: #fff; */
+  /* float:left; */
+  /* overflow: hidden; */
+  /* height: 60vh; */
+  /* display: flex;
+    flex-flow: row wrap;
     justify-content: space-between;
+ */
+  /* background-color:pink; */
+  display: grid;
+  grid-template-columns: repeat(12, 65px);
+  grid-column-gap: 20px;
+  /* grid-row-gap: 20px; */
+  /* 컨텐츠 크기에 맞게 늘어남 컨텐츠가 추가되면 자동적으로 늘어나게됨  */
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "rb rb rb rb nw nw nw nw nw nw nw nw"
+    "bd bd bd bd tw tw tw tw tw fv fv fv";
+}
+.news {
+  /* width: 650px;    */
+  /* float:left; */
+  grid-area: nw;
+}
+/* 추천서적 */
+.recommend-book {
+  /* width: 350px; */
+  /* position:relative; 
+    margin: -50px; */
+  /* float: left;   */
+  grid-area: rb;
+}
+.board {
+  /* width: 350px; */
+  background-color: /* float:left; */ skyblue;
+  grid-area: bd;
+  position: relative;
+}
+.favorite-site {
+  /* order: 1; */
+  /* width: 250px; */
+  background-color: yellow;
+  /* float:right; */
+  grid-area: fv;
+}
+.twitter {
+  background-color: violet;
+  /* float:left;
+    width:400px; */
+  grid-area: tw;
+}
+/* 슬로건 */
+
+.slogan {
+  background-color: silver;
+  /* clear: both; */
+  margin-top: 10px;
+  position: relative;
+}
+/* 슬로건 제목 */
+.slogan-heading{
+    position: absolute;
+    bottom: -35px;
+    width: 110px;
+    height: 83px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: yellow;
+
+}
+.slogan-heading::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background:url("/FDS09/css/images/coffee.png");
+}
+/* 슬로건 본문  */
+.slogan-content{
     font-size: 1.6rem;
+    margin: 1em 5em 1em 10em;
+}
+.slogan-content q::before{
+    /* quotes: "[[" "]]" ; */
+    /* 재정의도 아니고 꾸미기만 하니까 컨텐츠 필요가 없음  */
+    font-size: 5rem;
+    position: relative;
+    top: 2rem;
 
 }
-.menu span{
-    display: block;
-    cursor: pointer;
-    font-size: 1.8rem;
-    padding: 0.5em 0;
-    font-family: 'Noto Sans Bold', sans-serif;
-    text-shadow: 0px 1px 0  #000, 1px 0px 0 #000, 0 -1px 0 #0000,-1px 0 0 #000;
-     /* 속기법 */
-    transition: all 5s ease;
-    /* transition-property: color, font-size;
-    transition-duration: 3000ms, 5000ms; */
-    /* 순차적으로 애니매이션을 주고 싶을 때 쓴다. */
-    /* transition-delay: 0s, 5s; */
-    /* 가속과 감속에 대한것  */
-    /* transition-timing-function: cubic-bezier(.69,-0.26,.83,.67); */
-    /* 시간정보 앞에는 듀레이션타임 두 번째는 딜레이타임임 딜레이 타임은 생략할 수 있기 때문에 */
-    /* transition: color 0.5s 0s cubic-bezier(.69,-0.26,.83,.67), font-size 0.5s 0.5s cubic-bezier(.69,-0.26,.83,.67); */
-
-
-}
-.menu span:hover, menu li:focus span{
-    color: #ff0;
-    font-size: 2rem; 
-}
-.sub-menu{
-    
-    margin-top: 0.5em;
-}
-.sub-menu li{
-    margin: 0.5em 0 0.5em 1em;
+.slogan-content q::after{
+    content: "";
 }
 
-.sub-menu a{
-    display: block;
-    padding: 0.5em 0;
+/* 푸터 */
+
+.footer {
+  background-color: #988574;
+  color: #fff;
+  text-align: center;
+  padding: 2em 0;
 }
-/* .menu > li{
-    float: left;
+/* 주소  */
+.address{
+    font-style: normal;
+    margin-bottom: 1em;
+}
+.copyright{
+    font-size: 1em;
+
+}
+
+}
+
+
+
+
+/* grid toggle button */
+
+/* .btn-grid {
+  position: fixed;
+  top: 2em;
+  right: 2em;
+  background: #000;
+  color: #fff;
+  padding: 1em;
+  border-radius: 5px;
+} */
+
+/* 컨테이너 */
+/* 
+.container {
+  /* height: 100vh; */
+  /* background: gray; */
+  /* position: relative;
+} */
+/* 
+.is-act::before {
+  background: repeating-linear-gradient(
+    90deg,
+    hsla(70, 90%, 60%, 0.4) 0,
+    hsla(70, 90%, 60%, 0.4) 65px,
+    transparent 65px,
+    transparent 85px
+  );
+  content: "";
+  position: absolute;
+  width: 1000px;
+  height: 100%;
+  z-index: 100;
+  left: 50%;
+  /* margin-left: -500px;  */
+  /* transform: translateX(-50%);
 } */
 
 
 
-/* 메인 콘텐츠 */
-.main{
-    /*background-color: #fff; */
-    /* float:left; */
-    
-    /* overflow: hidden; */
-    /* height: 60vh; */
-    /* display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
- */
- /* background-color:pink; */
- display: grid;
- grid-template-columns: repeat(12, 65px);
- grid-column-gap: 20px;
- /* grid-row-gap: 20px; */
- /* 컨텐츠 크기에 맞게 늘어남 컨텐츠가 추가되면 자동적으로 늘어나게됨  */
- grid-template-rows: auto auto;
- grid-template-areas: 
- "rb rb rb rb nw nw nw nw nw nw nw nw"
- "bd bd bd bd tw tw tw tw tw fv fv fv";
+
+/* header::after{
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: repeating-linear-gradient(to right, rgba(255, 0, 0, 0.2), rgba(255, 0, 0, 0.2) 65px, transparent 65px, transparent 85px);
+    width: 100%;
+    height: 100%;
+ }  */
+
+/* 로고 */
+
+
+
+
+/* 멤버 링크 */
+
+
+/* .member li {
+  display: inline;  */
+  /* background-color: violet; */
+  /* font-size: 1rem; */
+  /* float: left;
 }
+
+/* a에 주면 그 부분도 선택할 수 있는 영역이 됨. */
+
+/* .member li::before {
+    content: "|";
+
+/* }  */
+
+/* .member li a  */
+
+
+/* .menu > li{
+    float: left;
+} */
+
+/* 메인 콘텐츠 */
+
+
+
 /* .main{
     background-color: pink;
     display: grid;
@@ -356,229 +963,22 @@ input[type="search"]{
                          "bd bd bd bd tw tw tw tw tw fv fv fv"
  } */
 
-
 /* 모듈화시키면 쓸 수 있음 이름이 clearfix로 설정한 것 플로트된 자식을 가진 부모가 있을 떄 부모에게 가서 clearfix를 써주면 됨  */
- 
-/* clearfix */
-.clearfix::after{
-     content:"";
-     /* background-color:yellow; */
-     display: block;
-     clear: both;
- }
 
- /* .clear{
+
+/* .clear{
      clear: both;
  } */
+/* 
+.main section {
+  background-color: teal;
+  height: 30vh; 
+} */
 
-.main section{
-    /* background-color: teal; */
-    /* height: 30vh;  */
-}
-.main [class$="-summary"]{
-    line-height: 1.5;
-    margin: 1em 0;
-}
-/* 추천서적 */
-.recommend-book{
-    /* width: 350px; */
-    /* position:relative;
-    margin: -50px; */
-     /* float: left;   */
-     grid-area: rb;
-}     
+
+
 /* 추천 서적 제목 */
 
-
 /* 메인 콘텐츠 섹션 제목 공통 */
-.main-section-heading{
-    background: url("./images/sprite_main.png") no-repeat;
-    padding: 5px 0 0 65px;
-    min-height: 60px;
-    margin: 1em 0;
 
-}
-.recommend-book-cover img{
-    max-width: 100%;
-    height: auto;
-}
-.recommend-book-cover{
-    margin: 1em auto;
-    text-align: center;
-    width: 75%;
-}
-.recommend-book-heading .en-heading{
-    display: block;
-    color: #abd375;
 
-}
-.recommend-book-detail{
-    text-align: center;
-    margin: 1em 0;
- 
-}
-.recommend-book-author, .recommend-book-author-name{
-    display: inline-block;
-}
-.recommend-book-summary{
-    line-height: 1.5;
-
-}
-.recommend-book-grade{
-    color: #abd375;
-    font-size: 2em;
-
-}
-/* 새소식 */
-.news{
-    /* width: 650px;    */
-    /* float:left; */
-    grid-area: nw;
-}
-/* 새소식 제목 */
-.news-heading{
-    height: 60px;
-  background-position:0 -230px ;  
-}
-en-heading{
-    display:block;
-}
-
-.news-video{
-    max-width: 100%;
-    height: auto;
-}
-/* 새소식 날짜 정보 */
-.news-date{
-    display: block;
-    text-align: right;
-}
-/* 게시판 */
-.board{
-    /* width: 350px; */
-    background-color:
-    /* float:left; */skyblue;
-    grid-area: bd;
-    position: relative;
-
-}
-/* 게시판 제목 */
-.board-heading{
-    background-position: 0 -115px;
-    margin-bottom: 0.5em;
-}
-.board-heading .en-heading{
-    /* display: block; */
-    color: #c7b39a;
-}
-/* 게시판 목록 */
-.board-list{
-    background: pink;
-
-    /* display: inline-block; */
-}
- /* .board-list li::after{
-    content:"";
-    clear:both;
-    display:block;
-}  */
-.board-list li{
-    background: lime;
-    margin: 0.5em 0;
-    padding: 0.5em 0;
-}
-.board-list a, .board-list time{
-    vertical-align: middle;
-}
-.board-list a{
-    background: orange;
-    /* display: inline; */
-    display: inline-block;
-    width: calc(100% - 100px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.board-list time{
-    background: teal;
-    /* float: right; */
-}
-.board-more{
-   position: absolute;
-   top:1.5em;
-   right:-0.5em;
-   padding: 0.5em;
-}
-.board-more::before{
-    color: #abd375;
-}
-/* 인기사이트 */
-.favorite-site{
-    /* order: 1; */
-
-    /* width: 250px; */
-    background-color: blueviolet;
-    /* float:right; */
-    grid-area: fv;
-}
-/* 트위터 */
-.twitter{
-    background-color: violet;
-    /* float:left;
-    width:400px; */
-    grid-area: tw;
-}
-.twitter-heading{
-    background-position: 0 -460px;
-}
-.twitter-heading .en-heading{
-    color: #6aaee6;
-   
-}
-/* 트위터 사용자 정보 */
-.twitter-user-info{
-    float: left;
-    margin-bottom: 1em;
-    width: calc(100% - 150px);
-}
-/* 트위터 사용자 이미지 */
-.twitter-profile{
-    float: right;
-    margin: 0 0 0.5em 1em;
-}
-.twitter-thumbnail{
-    border-radius: 50%;
-    padding: 0.5em;
-    border: 1px solid #333;
-}
-.twitter-summary{
-    background: orange;
-
-}
-.twitter-user-name , .twitter-user-id{
-   float:left;
-}
-
-.twitter-date{
-    display: block;
-    text-align: right;
-    clear:both;
-}
-
-/* .twitter-profile img{
-    background: skyblue;
-    float: right;
-} */
-/* 슬로건 */
-.slogan{
-    background-color: silver; 
-    height: 10vh;
-    /* clear: both;  */
-    margin-top: 10px;
-
-}
-/* 푸터 */
-.footer{
-    background-color: skyblue;
-    height: 10vh;
-}

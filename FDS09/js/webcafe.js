@@ -1,50 +1,58 @@
-// var container = document.querySelector(".container");
-// var grid = document.querySelector(".btn-grid");
+$(document).ready(function () {
+  var viewport = window.matchMedia('(max-width:999px)');
+  if (viewport.matches) {
+    var nav = $('.navigation');
+    var btn = $('.btn-menubar');
+    var menu = $('.menu');
+    var menuLists = $('.menu-list');
+    var menuItems = $('.menu-item');
+    var subMenus = $('.sub-menu');
 
-// grid.addEventListener('click',function(){
-//   console.log("ok")
-//   container.classList.toggle('is-act');
-// });
+    // 999px 이하에서 적용할 코드
+    menuItems.attr('aria-haspopup', 'true');
+    menuItems.attr('aria-expanded', 'false');
+    menuItems.attr('role', 'button');
+    menuItems.attr('tabindex', '0');
+    menuItems.addClass('icon-plus');
 
-// $(document).ready(function(){
-//   var video = $('.news-video');
+    btn.on('click', function(e) {
+      // e.preventDefault();
+      nav.toggleClass('is-act');
+      if (nav.hasClass('is-act')) {
+        btn.attr('aria-label', '메인 메뉴 닫기');
+      } else {
+        btn.attr('aria-label', '메인 메뉴 열기');
+      }
+    });
 
-//   video.on('mouseover focusin', function(){
-//     $(this).attr('autoplay','true');
-//   });
-//   video.on('mouseout focusout', function(){
-//     $(this).attr('autoplay','false');
-// });
+    menuItems.on('click keydown', function(e) {
+      menu.on("focusout", function(){
+        nav.removeClass("is-act");
+      });
+      menu.on("focusin", function(){
+        nav.addClass('is-act');
+      });
+      if (e.type === 'click' || (e.type === 'keydown' && e.keyCode === 13)) {
+        menuLists.removeClass('menu-act');
+        menuItems.addClass('icon-plus');
+        subMenus.css('display', 'none');
+        menuItems.css('color','#fff');
+        $(this).parent().addClass('menu-act');
+        if ($(this).parent().hasClass('menu-act')) {
+          $(this).attr('aria-expanded', 'true');
+          $(this).addClass('icon-minus');
+          $(this).removeClass('icon-plus');
+          $(this).siblings().css('display', 'block');
+          $(this).css('color','yellow');
+        } else {
+          $(this).attr('aria-expanded', 'false');
+        }
+      }
+    });
+  } else {
+    // 1000px 이상에서 사용할 코드
+  }
+  menu.on('focusin',function(){
 
-
-// 제이쿼리에서 지원하는 메소드나 프로퍼티를 사용해야한다. 
-// 문서 준비 제이쿼리 레디 이벤트 메소드 
-// 헤드 바디 상관없음 
-$(document).ready(function(){
-  var grid = $('.btn-grid');
-  var container = $(".container");
-  var video = $('.news-video');
-  video.get(0).volume = 0.0;
-// multi bind on 이 내부에서 반복문을 돌림 제이쿼리를 이용하면 쉽게 할 수 있음 
-//네이티브를 제이쿼리가 간단하게 해줌 
-  video.on('mouseover focusin', function(){
-    // this.play();
-    this.volume = 1.0;
-  });
-  video.on('mouseout focusout', function(){
-    this.pause();
-  });
-grid.click(function(){
-  container.toggleClass('is-act');
-}); 
+  })
 });
-
-
-
-
-
-// var grid = $('.btn-grid');
-// var container = $(".container");
-// grid.click(function(){
-//   container.toggleClass('is-act');
-// }); 

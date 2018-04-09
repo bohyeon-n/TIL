@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>고해상도 환경을 위한 배경이미지 처리 </title>
+  <!-- <style>
+    .box{
+      width: 500px;
+      height: 500px;
+      background: url("images/small.jpg");
+    }
+    @media only screen and (min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi){
+      .box{
+        background-image: url("images/large.jpg");
+      }
+    }
+  
+  </style> -->
+  <style>
+    table{
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+  ht, td{
+    border: 1px solid #000;
+  }
+</style>
+</head>
+<body>
+  <!-- <h1>해상도에 따른 이미지 분기</h1>
+  <img src="images/image-src.png" alt="srcset demo" 
+  srcset="images/image-1x.png 1x, images/image-2x.png 2x,
+  images/image-3x.png 3x, images/image-4x.png 4x"> -->
+<!-- <h1>picture</h1>
+<picture>
+  <source srcset ="images/large.jpg" media="(min-width: 1200px)">
+  <source srcset ="images/medium.jpg media="(min-width: 480px) and (max-width:1119px)">
+  <source srcset ="images/small.jpg media="(max-width: 479px)">
+  <img src="images/normal.jpg" alt="picture demo" width="500" height="350">
+</picture> -->
+  <h1>테이블 마크업</h1>
+  <table>
+    <thead>
+      <tr>
+        <ht id="name" >이름</ht>
+        <ht id="en">영어</ht>
+        <ht id="ko">국어</ht>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+      <th id="sum">합계</th>
+      <td headers="en sum">150</td>
+      <td headers="ko sum">180</td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr>
+        <td>이영희</td>
+        <td>80</td>
+        <td>90</td>
+      </tr>
+      <tr>
+        <th>김철수</th>
+        <td>70</td>
+        <td>90</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
