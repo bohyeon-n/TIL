@@ -121,6 +121,16 @@ printEvenOrOdd(i+1);
 ### 문제 8
 
 1부터 100까지의 수를 차례대로 출력하되, 자릿수에 3, 6, 9중 하나라도 포함되어 있으면 '짝!'을 대신 출력하는 프로그램을 작성하세요.
+```js
+for(i = 1; i <= 100; i++){
+  const str = i.toString();
+  if(str.includes("3") || str.includes("6") || str.includes("9")){
+    console.log(`짝!`);
+  }else{
+    console.log(i);
+  }
+}
+```
 
 ### 문제 9
 
@@ -145,6 +155,13 @@ printEvenOrOdd(i+1);
 * * *
 * * * *
 * * * * *
+```
+```js
+function print(num){
+  for(let i = 0; i<num; i++){
+     console.log('* '.repeat(i+1));
+  }
+}
 ```
 
 ### 문제 10
@@ -177,6 +194,18 @@ printEvenOrOdd(i+1);
    * *
     *
 ```
+```js
+function diamond(num){
+  for(let i = 0; i < num; i++){
+  console.log(' '.repeat(num-i-1) + "* ".repeat(i+1));
+  }
+  for(let i = num-1 ; i > 0; i-- ){
+    console.log(' '.repeat(num - i) + '* '.repeat(i));
+  }
+}
+diamond(3)
+diamond(5)
+```
 
 ### 문제 11
 
@@ -185,7 +214,39 @@ printEvenOrOdd(i+1);
 ### 문제 12
 
 세 수를 입력받아 큰 것부터 차례대로 출력하는 함수를 작성하세요.
+```js
+function sort(x,y,z){
+  let larger = x > y ? x : y;
+  let smaller1 = x > y? y : x
+  let max = larger > z ? larger : z;
+  let smaller2 = larger > z ? z : larger;
+  console.log(max);
+  if(smaller1 > smaller2 ){
+    console.log(smaller1);
+    console.log(smaller2);
+  }else{
+    console.log(smaller2);
+    console.log(smaller1);
+  }
+  }
 
+```
+```js
+function sort(x,y,z){
+  let larger = x > y ? x : y;
+  let smaller1 = x > y? y : x
+  let max = larger > z ? larger : z;
+  let smaller2 = larger > z ? z : larger;
+  let min = smaller1 > smaller2 ? smaller2 : smaller1; 
+  let mid = smaller1 > smaller2 ? smaller1 : smaller2;
+  console.log(max);
+  console.log(mid);
+  console.log(min);
+}
+```
+```js
+//버블정렬
+```
 ### 문제 13
 
 자연수 `n`을 입력받아, `n`번째 피보나치 수를 반환하는 함수를 작성하세요.
