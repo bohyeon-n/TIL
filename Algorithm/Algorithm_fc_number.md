@@ -87,6 +87,7 @@ function limit(min, max, input){
 ```
 게임을 만들 때 쓸 수 있는 pos = limit (0, 10, x)
 ### 문제 4
+
 ```js
 function printEvenOrOdd(x){
   if(x % 2 === 0){
@@ -214,6 +215,7 @@ diamond(5)
 ### 문제 12
 
 세 수를 입력받아 큰 것부터 차례대로 출력하는 함수를 작성하세요.
+
 ```js
 function sort(x,y,z){
   let larger = x > y ? x : y;
@@ -244,9 +246,9 @@ function sort(x,y,z){
   console.log(min);
 }
 ```
-```js
-//버블정렬
-```
+
 ### 문제 13
 
 자연수 `n`을 입력받아, `n`번째 피보나치 수를 반환하는 함수를 작성하세요.
+
+표현식의 결과값과 같은 이름을 갖는 속성을 가져온다. 
