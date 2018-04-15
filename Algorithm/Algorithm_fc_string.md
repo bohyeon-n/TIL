@@ -284,6 +284,7 @@ toCamelCase("hello_javascript_world");
 ```
 
 
+
 ### 문제 15
 
 `String.prototype.split`과 똑같이 동작하는 함수를 작성하세요.
