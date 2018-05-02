@@ -227,11 +227,13 @@ maxlength("hello javascript world");
 ```js
 function firstStr(s, n) {
   let newStr ="";
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < s.length && i < n; i++) {
     newStr += s[i];
   }
   return newStr;
 }
+//  n 이 s의 길이보다 많으면 undefined가 나오게 됨 
+// 조건식의 한 개의 조건만 올 수 있는 것이 아님 
 ```
 ```js
 function firstStr(s, n) {
@@ -239,11 +241,16 @@ function firstStr(s, n) {
 }
 ```
 ```js
- function arr(s,n) {
-   s = s.split("");
-  return s.filter((item, index) => index < n ).join("");
+ function firstStr(s,n) {
+   //return Array
+   //.from(s)
+   //.filter((item, index) => index < n)
+   //.join("");
+   // 매개변수에 다시 다른 값을 대입해주는 것은 좋지 않다. 
+   // 문자열 s가 다시 필요할 때가 있을 수 있음 
+  const arr = s.split("");
+  return arr.filter((item, index) => index < n ).join("");
  }
- arr("javascript", 4);
 firstStr("javascript", 4);
 ```
 
@@ -265,6 +272,7 @@ function toSnakeCase(str){
 }
 
 toSnakeCase("helloJavascriptWorld");
+// 맨 앞글자가 대문자일 경우에도 생각해봐야 함 
 ```
 ### 문제 14
 
@@ -299,7 +307,6 @@ split('let,const,var', ',') -> ['let', 'const', 'var']
 function split(str,seperator){
   let newStr = [];
   let word = "";
-  let count = 0;
   for (let i = 0; i < str.length; i++) {
   if (seperator == null) {
     newStr = [str];
@@ -332,7 +339,6 @@ function convertBinary(str){
   let result = 0;
   for(let i = str.length-1; i >= 0; i--){
     result += str[i] * x;
-    console.log(str[i], x, result)
     x *= 2;
     }
   return result;

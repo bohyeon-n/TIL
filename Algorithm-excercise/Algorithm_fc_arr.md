@@ -26,13 +26,17 @@ function toNotFalsy(arr){
 }
 toNotFalsy([0,false,"java",2,null, undefined])
 ```
-
+```js
+function newArr (arr) {
+  newArr.filter
+}
+```
 ### 문제 4
 
 배열을 입력받아, 중복된 요소가 제거된 새 배열을 반환하는 함수를 작성하세요.
 
 ```js
-function newArr(arr){
+function newArr (arr) {
   newArr = [];
   for(let i = 0; i < arr.length; i++){
     if(!newArr.includes(arr[i])){
@@ -42,6 +46,7 @@ function newArr(arr){
   return newArr;
 }
 ```
+
 
 
 ### 문제 5
@@ -83,6 +88,7 @@ coins(263, [100, 50, 10, 5, 1]);
 
 ```js
 function coins(money, coins){
+  //배열일 때는 복수로 써줘야 한다. 
   for (let i = 0; i < coins.length; i++) {
     while (money / coins[i] >= 1) {
       console.log(coins[i]);
@@ -90,6 +96,21 @@ function coins(money, coins){
     }
     }
   }
+coins(263, [100, 50, 10, 5, 1]);
+```
+```js
+function coins(money, coinTypes){
+  let currentMoney = money; 
+  let coinIndex = 0;
+  while(currentMoney > 0){
+    if (currentMoney - coinTypes[coinIndex] >= 0){
+      console.log(coinTypes[coinIndex])
+      currentMoney  -= coinTypes[coinIndex];
+    } else {
+      coinIndex++;
+    }
+  }
+}
 coins(263, [100, 50, 10, 5, 1]);
 ```
 
