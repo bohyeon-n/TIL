@@ -43,6 +43,7 @@
 - 이슈의 title, body, deadline을 설정한다.
 - created 와 progress를 설정한다.
 - 이슈에 라벨을 붙일 수 있다. (이슈의 종류를 설정 할 수 있다.)
+- 라벨은 사용자가 생성할 수 있고, 기존의 라벨을 선택할 수도 있다.
 
 
 ## 데이터 구조 설계 
@@ -61,7 +62,8 @@
    {
      “id”: 1,
      “title”: “프로젝트 관리 프로그램”,
-     “body”:“리액트로 프로젝트 관리 프로그램을 만든다.”
+     “body”:“리액트로 프로젝트 관리 프로그램을 만든다.”,
+     "created": 0610
    }
  ],
  “assignees”: [
@@ -81,6 +83,7 @@
      “created”: 0619,
      "deadline": 0620,
      "progress": 'todo'(todo/doing/done)
+     "label": '' 
    }
  ],
  "comments": [
@@ -88,7 +91,8 @@
      "id": 1,
      "userId":1,
      "issueId":1,
-     "body":"현재 설계중에 있습니다."
+     "body":"현재 설계중에 있습니다.",
+     "created": 06111201
    }
  ]
 }
