@@ -66,7 +66,7 @@
      "created": 0610
    }
  ],
- “assignees”: [
+ “projectmembers”: [
    {
      “id”: 1,
      “userId”: 1,
@@ -82,7 +82,7 @@
      “body”: “db.json을 설계한다.“,
      “created”: 0619,
      "deadline": 0620,
-     "progress": 'todo'(todo/doing/done)
+     "progress": 'todo'(todo/doing/done),
      "label": '' 
    }
  ],
@@ -104,4 +104,6 @@
 - 주요 기능에 집중하여 만들어야 겠다. 
 
 
-
+- 고민되는 점 
+  - 프로젝트의 이슈생성 권한을 프로젝트를 생성한 사람에게만 부여할 것인지, 프로젝트를 만든 사람을 포함하여 모든 사람에게 부여할 것인지
+  - 처음계획은 회사 별로 가입할 수 있도록 하려고 했는데 복잡하지는 않은지
