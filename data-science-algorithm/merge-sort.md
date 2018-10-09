@@ -41,7 +41,7 @@ const merge = function(array, p, q, r) {
 };
 var mergeSort = function(array, p, r) {
   if (p < r) {
-    const q = Math.floor((r - p) / 2) + q;
+    const q = Math.floor((r - p) / 2) + p;
     mergeSort(array, p, q);
     mergeSort(array, q + 1, r);
     merge(array, p, q, r);
@@ -127,3 +127,79 @@ n 개의 요소를 병합할 때 merge 함수가 Θ(n)번 실행된다면, merge
 트리에 l 레벨이 있다면 총 병합시간은 l\*cn 이다. l 은 무엇일까? 이제까지 n 크기 문제의 하위 문제로 시작해서 하위 문제가 1 로 줄어들 때까지 반복적으로 이를 반으로 줄였다. l = log2n + 1 이다. 예를 들어 n = 8 이라면 log2n + 1 = 4 이고 트리는 n = 8,4,2,1 의 4 레벨로 이루어져 있다. 그러면 mergeSort 에 드는 총 시간은 cn(log2n +1)이다. 이 샐행 시간을 나타내기 위해 big-Θ 표기법을 사용한다면 Θ(nlog2n)이 된다.
 
 병합정렬은 제자리에서 작동하지 않는다(lowwHalf, highHalf 복사본) 그에 반해 선택 정렬과 삽입 정렬은 어떤 경우라도 배열 요소를 상수 개수 이상 복사하지 않기 때문에 모두 제자리에서 작동한다. 저장 공간이 부족한 시스템이라면 알고리즘이 제자리에서 작동하는지 여부에 대해서도 고려한다.
+
+## 병합 정렬 연습하기 - javascript
+
+```js
+const merge = function(array, p, q, r) {
+  const array1 = array.slice(p, q + 1);
+  const array2 = array.slice(q + 1, r + 1);
+  let i = 0;
+  let j = 0;
+  let k = p;
+  while (array1.length > i && array2.length > j) {
+    if (array1[i] < array2[j]) {
+      array[k++] = array1[i++];
+    } else {
+      array[k++] = array2[j++];
+    }
+  }
+  while (array1.length > i) {
+    array[k++] = array1[i++];
+  }
+  while (array2.length > j) {
+    array[k++] = array2[j++];
+  }
+};
+var mergeSort = function(array, p, r) {
+  if (p < r) {
+    const q = Math.floor((r - p) / 2) + p;
+    mergeSort(array, p, q);
+    mergeSort(array, q + 1, r);
+    merge(array, p, q, r);
+  }
+};
+array = [0, 2, 5, 3, -1, 7];
+mergeSort(array, 0, 5);
+console.log(array);
+```
+
+## 병합 정렬 연습하기 - python
+
+```py
+def merge(array,p,q,r):
+  i = 0
+  j = 0
+  k = p
+  arr1 = array[p:q+1]
+  arr2 = array[q+1:r+1]
+  while i < len(arr1) and j < len(arr2):
+    if arr1[i] < arr2[j]:
+      array[k] = arr1[i]
+      i += 1
+    else:
+      array[k] = arr2[j]
+      j += 1
+    k += 1
+  while i < len(arr1):
+    array[k] = arr1[i]
+    i += 1
+    k += 1
+  while j < len(arr2):
+    array[k] = arr2[j]
+    j += 1
+    k += 1
+  print(array, p, q, r)
+
+def mergeSort(array, p, r):
+  if(p < r):
+    q = (r - p) // 2 + p
+    mergeSort(array,p,q)
+    mergeSort(array,q+1,r)
+    merge(array,p,q,r)
+
+array = [4,1,-9,6,2,0]
+mergeSort(array, 0 ,5)
+```
+
+파이썬에서 리스트는 변경 가능 객체이다. 함수 인자를 넘겨줄 떄 리스트는 객체 참조에 의한 전달을 한다. 참조한 리스트에 접근해 변경을 하면 함수 밖에 영향을 준다.
