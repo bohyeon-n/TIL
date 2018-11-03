@@ -2,28 +2,28 @@
 
 1. 러닝 자바스크립트 훑어보기 (~ 1111)
 
-- [x] chapter 1
-- [x] chapter 2
-- [x] chapter 3
-- [ ] chapter 4
-- [ ] chapter 5
-- [ ] chapter 6
-- [ ] chapter 7
-- [ ] chapter 8
-- [ ] chapter 9
-- [ ] chapter 10
-- [ ] chapter 11
-- [ ] chapter 12
-- [ ] chapter 13
-- [ ] chapter 14
-- [ ] chapter 15
-- [ ] chapter 16
-- [ ] chapter 17
-- [ ] chapter 18
-- [ ] chapter 19
-- [ ] chapter 20
-- [ ] chapter 21
-- [ ] chapter 22
+- [x] chapter 1 - 첫 번째 애플리케이션
+- [x] chapter 2 - 자바스크립트 개발 도구
+- [x] chapter 3 - 리터럴과 변수, 상수, 데이터 타입
+- [x] chapter 4 - 제어문
+- [x] chapter 5 - 표현식과 연산자
+- [x] chapter 6 - 함수
+- [x] chapter 7 - 스코프
+- [ ] chapter 8 - 배열과 배열 처리
+- [ ] chapter 9 - 객체와 객체지향 프로그래밍
+- [ ] chapter 10 - 맵과 셋
+- [ ] chapter 11 - 예외와 에러 처리
+- [ ] chapter 12 - 이터레이터와 제너레이터
+- [ ] chapter 13 - 함수와 추상적 사고
+- [ ] chapter 14 - 비동기적 프로그래밍
+- [ ] chapter 15 - 날짜와 시간
+- [ ] chapter 16 - Math
+- [ ] chapter 17 - 정규 표현식
+- [ ] chapter 18 - 브라우저의 자바스크립트
+- [ ] chapter 19 - 제이쿼리
+- [ ] chapter 20 - 노드
+- [ ] chapter 21 - 객체 프로퍼티 설정과 프락시
+- [ ] chapter 22 - 추가 자원
 
 2. 알고리즘 기초 (0919 ~ 1012)
 
@@ -49,7 +49,7 @@
 - [x] 클래스 - 1015
 - [x] CPU - 1019
 - [x] 메모리 - 1023
-- [ ] 프로세스와 스레드 - 1026
+- [x] 프로세스와 스레드 - 1026
 - [ ] 프로그래밍 언어 - 1029
 - [ ] 자료 구조 1 - 1031
 - [ ] 자료 구조 2 - 1103
@@ -75,3 +75,4 @@
 - css preprocessors 의 장점 - 1011
 - 클로저 - 1012
 - cache busting - 1017
+- 콜스택 - 1026
