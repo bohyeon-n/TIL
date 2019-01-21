@@ -234,6 +234,8 @@ fucntion warnUser(): void{
 }
 ```
 
+함수가 아무것도 반환하지 않으므로 리턴 타입을 void로 설정하였다.
+
 void 타입으로 변수를 선언하는 것은 undefined 나 null만 지정할 수 있기 때문에 유용하지 않다.
 
 ```ts
@@ -262,12 +264,15 @@ let n: null = null;
 `never`타입은 부속 타입이며, 모든 타입에 할당할 수 있다. 그러나 never자신을 제외하고 어떠한 타입도 할당할 수 있는 타입이 없다. 심지어 `any`는 `never`에 할당할 수 없다.
 
 ```ts
+// never을 리턴하는 함수는 도달할 수 없는 end point가 있어야 한다.
 function error(message: string): never {
   throw new Error(message);
 }
+// inferred return type is never
 function fail() {
   return error("something failed");
 }
+// function returning never must hava unreachable end point
 function infiniteLoop(): never {
   while (true) {}
 }
@@ -277,12 +282,12 @@ function infiniteLoop(): never {
 
 object는 non-primitive type이다. 예를들어 `number`, `string`, `boolean` `symbol`, `null`, `undefined` 이 아닌 것들
 
-object 타입에서 `Object.create`같은 API는 더 잘 표현한다. 예를들어
+object 타입은 `Object.create`같은 API에서 더 잘 표현한다. 예를들어
 
 ```ts
 declare function create(o: object | null): void;
-create({ prop: 0 });
-create(null);
+create({ prop: 0 }); // OK
+create(null); // OK
 
 create(42); //Error
 create("string"); //Error
@@ -309,7 +314,7 @@ let strLength: number = (<string>someVlaue).length;
 ```ts
 let someValue: any = "this is a string";
 
-let strLength: nuber = (someValue as string).length;
+let strLength: number = (someValue as string).length;
 ```
 
 두 샘플은 동일하다. 더 맘에 드는 것을 선택하여 사용하면 된다. 그러나 jsx문법에서 타입스크립트를 사용할 때는 -as 스타일만 허용된다.
