@@ -183,7 +183,7 @@ function f(input: boolean) {
 
 지역 변수 a와 b가 있다. a의 스코프는 f의 바디로 제한되어 있다. b가 if 구문 블록 포함에 제한되어 있는 동안
 
-catch절 안에서 선언된 변수는 유사한 스코핑 규칙을 가지고 있다.
+catch절 안에서 선언된 변수도 유사한 스코핑 규칙을 가지고 있다.
 
 ```ts
 try {
@@ -198,3 +198,303 @@ console.log(e);
 **렉시컬 스코프?**
 스코프는 함수를 호출할 때가 아니라 선언할 때 생긴다. 정적 스코프라고도 불린다. 이런것을 렉시컬 스코핑이라고 한다. 함수를 처음 선언하는 순간, 함수 내부의 변수는 자기 스코프로부터 가장 가까운 곳에 있는 변수를 계속 참조하게 된다.
 [함수 범위(scope)](https://www.zerocho.com/category/JavaScript/post/5740531574288ebc5f2ba97e)
+
+block-scoped의 다른 속성은 실제로 선언되기 전에는 읽거나 쓸 수 없다는 것이다.
+
+```ts
+a++; // illegal to use 'a' before it's declared;
+
+let a;
+```
+
+주의해야 할 점은 변수가 선언되기 전에 여전히 block-scope 변수를 capture 할 수 있다는 것이다. 오직 catch만 선언되기 전에 함수를 호출할 수 없다. es2015 타겟팅이라면, 모던 런타임은 에러가 발생할 것이다. 그러나 타입스크립트는
+허용하고 에러가 발생하지 않는다.
+
+```ts
+function foo() {
+  // okay to capture 'a'
+  return a;
+}
+//illegal call 'foo' before 'a' is declared
+// runtimes should throw an error here
+foo();
+
+let a;
+```
+
+#### Re-declarations and shadowing
+
+`var`변수 선언는 변수를 얼마나 여러 번 선언하는지는 문제되지 않는다.
+
+```ts
+function f(x) {
+  var x;
+  var x;
+  if (true) {
+    var x;
+  }
+}
+```
+
+위 예시에서, x의 모든 선언은 실은 같은 x를 가리킨다. 그리고 이는 완전히 유효하다. 이는 버그의 원인이 되기도 한다.
+고맙게도,`let` 선언은 이를 허용하지 않는다.
+
+```ts
+let x = 10;
+let x = 20; // error: 같은 스코프에서 x를 다시 선언할 수 없다.
+```
+
+```ts
+function f(x) {
+  let x = 100; // error: interferes with parameter declaration
+}
+function g() {
+  let x = 100;
+  let x = 100; // error: can't have both declaration of 'x';
+}
+```
+
+블록 스코프 변수가 함수 스코프 변수로 절대 선언할 수 없다는 말은 아니다.
+
+```ts
+function f(condition, x) {
+  if (condition) {
+    let x = 100;
+    return x;
+  }
+  return x;
+}
+
+f(false, 0); // return '0'
+f(true, 0); // return '100'
+```
+
+보다 중첩된 스코프 안에서 새로운 이름을 소개하는 것을 shadowing 이라 부른다. 이것은 양날의 검이다. 우발적인 shadowing 이 자체에서 특정 버그가 발생할 수 있다. 특정 버그를 막는 막는 동안에. 예를들어 sumMatrix() 함수가 `let`변수를 쓴다고 해보자.
+
+```ts
+function sumMatrix(matrix: number[][]) {
+  let sum = 0;
+  for (let i = 0; i < matrix.length; i++) {
+    var currentRow = matrix[i];
+    for (let i = 0; i < currentRow.length; i++) {
+      sum += currentRow[i];
+    }
+  }
+}
+```
+
+루프의 버전은 실제로 정확히 합산되어 수행될 것이다. 왜냐하면 안쪽 루프의 i가 바깥 쪽 루프의 i를 가렸기 때문이다.
+
+shadowing은 보통 클린 코드를 작성하기 위해 피해야 한다.
+
+#### block-scope variable capturing
+
+먼저 `var`선언 변수 캡쳐링을 다뤘을 때, 우리는 일단 캡쳐 되었을 때, 변수가 어떻게 동작하는지 간단히 알아보았습니다. 이에 대해 더 나은 직관을 주기위해, 변수의 환경을 생성하였다.
+환경과 캡쳐된 변수는 스코프내의 모든 것이 실행을 끝난 후에도 존재할 수 있습니다.
+
+```ts
+function theCityThatAlwaysSleeps() {
+  let getCity;
+  if (true) {
+    let city = "Seattle";
+    getCity = function() {
+      return city;
+    };
+  }
+  return getCity();
+}
+```
+
+if 블록이 끝나도 if블록 안에서 getCity함수를 통해 city를 캡쳐했으므로 if 블록 실행이 끝난 후에도 city
+변수에 접근할 수 있다.
+
+전에 setTimeout 예시를 다시 생각해보면, 우리는 결국 for loop 의 매 반복마다 변수의 상태를 캡쳐하기 위해 IIFE를 사용했다.  
+사실상, 우리가 한 일은 캡쳐된 변수를 위해 새로운 변수 환경을 생성한 것이다.
+
+`let`선언은 루프의 일부로 선언될 때 전혀 다른 방식을 가지고 있다. 루프 자체 의 새로운 환경을 도입하는 것 보다는, 이 선언은 이터레이션마다 새로운 스코프를 생성한다.
+
+```ts
+for (let i = 0; i < 10; i++) {
+  setTimeout(function() {
+    console.log(i), 100 * i;
+  });
+}
+```
+
+### const declarations
+
+const 선언은 변수를 선언하는 또다른 방법이다.
+
+let 선언과 유사하지만, 이름에도 내포되어 있듯이, 값이 한 번 묶이면, 바꿀 수 없다. 다른말로, let처럼 같은 스코핑 룰을 갖고 있지만, 다시 할당할 수 없다.
+
+```js
+const numLivesForCat = 9;
+```
+
+```js
+const numLivesForCat = 9;
+const kitty = {
+  name: "aurora",
+  numLives: numLivesForCat
+};
+// error
+kitty = {
+  name: "danielle",
+  numLives: numLivesForCat
+};
+// all 'okay'
+kitty.name = "rory";
+kitty.name = "kitty";
+kitty.numLives--;
+```
+
+위 같은 상황을 막기 위한 특별한 조치를 하지 않으면, `const`변수의 내부 상태는 수정 가능하다. 다행히도, 타입스크립트는 객체의 멤버를 `readonly`로 지정할 수 있다.
+
+### let vs const
+
+유사한 스코핑을 가지고 있는 두 가지 타입의 선언을 고려하면, 어떤 것을 써야 하는지 궁금할 것이다.
+
+principle of least privilege를 적용하면, 수정할 변수가 아닌 것들은 모두 `const` 선언을 사용해야 합니다.
+원리는 변수가 쓰여질 필요가 없다면 같은 코드 베이스의 다른 작업도 자동적으로 객체에 쓸 수 없다. 실제로 변수를 할당해야 하는지 고려해야 할 필요가 있다.
+`const`를 사용하면 데이터 흐름에 관해 더 예측 가능하게 할 수 있다.
+
+#### Destructuring
+
+타입스크립트의 ECMAScript 2015 다른 기능은 dstructing 이다.
+
+- Array destructuring
+
+```ts
+let input = [1, 2];
+let [first, second] = input;
+console.log(first); // outputs 1
+console.log(second); // outputs 2
+```
+
+```ts
+first = input[0];
+second = input[1];
+```
+
+함수의 파리미터에도 사용할 수 있다.
+
+```ts
+function f([first, second]: [number, number]) {
+  console.log(first);
+  console.log(second);
+}
+f([1, 2]);
+```
+
+... 구문을 사용하여 남은 remaining item을 생성할 수 있다.
+
+```ts
+let [first, ...rest] = [1, 2, 3, 4];
+console.log(first); //1
+console.log(rest); // [2,3,4]
+```
+
+- object destructuring
+
+```ts
+let o = {
+  a: "foo",
+  b: 12,
+  c: "bar"
+};
+let { a, b } = o;
+```
+
+```ts
+let { a, ...passthrough } = o;
+let total = passthrough.b + passthrough.c.length;
+```
+
+- property remaining
+
+속성에 다른 이름을 줄 수 있다.
+
+```ts
+let { a: newName1, b: newName2 } = o;
+```
+
+```ts
+let { a, b }: { a: string; b: number } = o;
+```
+
+- default values
+
+```ts
+function keepWholeObject(wholeObject: { a: string; b?: number }) {
+  let { a, b = 1001 } = wholeObject;
+}
+```
+
+keetWholeObject wholeObject 변수가 있다. a와 b, b가 정의되지 않은 경우에도
+
+- function declarations
+  destructuring 은 함수 선언에서도 사용할 수 있다.
+
+```ts
+type C = { a: string; b?: number };
+function f({ a, b }: C): void {
+  //...
+}
+```
+
+그러나, 디폴트로 지정하는 것이 더 일반적이고, destructuring 과 디폴트를 바르게 얻는 것은 까다롭다. 먼저, 디폴트 값 전에 패턴을 놓자.
+
+```ts
+function f({ a = "", b = 0 } = {}): void {
+  //...
+}
+f();
+```
+
+위 코드는 타입 inference(추론?)의 예이다. 추후에 설명하겠다.
+
+그런다음, main initializer 대신에 destructured property에 optional property의 디폴트를 주어야 한다. C는 b옵션으로 정의되어 있다.
+
+```ts
+function f({ a, b = 0 } = { a: "" }): void {
+  //...
+}
+f({ a: "yes" }); // ok, default b = 0
+f(); // ok, default to { a: "" }, which then defaults b = 0
+f({}); // error, 'a' is required if you supply an argument
+```
+
+- spread
+
+스프레드 연산자는 destructuring 의 반대 이다. 다른 배열에 배열을 혹은 다른 객체에 객체를 스프레드 할 수 있다.
+
+```ts
+let first = [1, 2];
+let second = [3, 4];
+let bothPlus = [0, ...first, ...second, 5];
+```
+
+```ts
+let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
+let search = { ...defaults, food: "rich" };
+```
+
+객체 스프레드는 배열 스프레드보다 더 복잡하다. 배열스프레드처럼 왼쪽에서 오른쪽으로 실행하지만, 결과는 객체이다. 스프레드 객체에서 나중에 오는 속성이 먼저 오는 프로퍼티를 오버라이트한다.
+
+```ts
+let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
+let search = { food: "rich", ...defaults };
+```
+
+객체 스프레드는 다른 놀라운 제한이 있습니다. 먼저, 오직 object의 고유한 enumberable propery만을 포함할 수 있습니다. 기본적으로 객체의 인스턴스를 스프레드 할 때, 메서드를 잃는 다는 말입니다.
+
+```ts
+class C {
+  p = 12;
+  m() {}
+}
+let c = new C();
+let clone = { ...c };
+clone.p; //ok
+clone.m(); // error !
+```

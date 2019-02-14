@@ -29,7 +29,7 @@ append(...)
 
 ## 연결 리스트
 
-연결 리스트는 데이터와 참조로 구성된 누드가 한 방향 혹은 양방향으로 쭉 이어져 있는 자료 구조이다. 참조는 다음 노드 혹은 이전 노드를 가리킨다.
+연결 리스트는 데이터와 참조로 구성된 노드가 한 방향 혹은 양방향으로 쭉 이어져 있는 자료 구조이다. 참조는 다음 노드 혹은 이전 노드를 가리킨다.
 
 ### 노드
 
@@ -38,3 +38,64 @@ append(...)
 연결 리스트에서 사용할 노드를 직접 구현해 보자.
 
 ### 연결 리스트 구현
+
+- 생성자, empty() 함수, size() 함수
+
+```py
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.d_size = 0
+
+    def empty(self):
+        if self.d_size == 0:
+            return True
+        else:
+            return False
+
+    def size(self):
+        return self.d_size
+
+```
+
+- append 함수
+  연결 리스트에 tail 다음에 new_node을 이어준 후 tail 을 새 노드로 옮겨준다. 비어있을 경우는 tail 에 new_node 를
+
+```py
+    def append(self, data):
+        new_node = Node(data)
+
+        if self.empty():
+            self.head = new_node
+            self.tail = new_node
+            self.d_size += 1
+            # 연결리스트가 비어있지 않으면 새 노드를 tail 이 가리키는 노드에 이어준다. 그리고 tail을 새 노드로 옮긴다.
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
+            self.d_size += 1
+```
+
+- search_target(), search_pos() 함수 구현: 데이터 검색(순회)
+
+```py
+    def search_target(self, target, start = 0):
+
+        if self.empty():
+            return None
+        pos = 0
+        cur = self.head
+        # pos가 탐색 시작 위치 start 보다 클 때만
+        # 대상 데이터와 현재 노드의 데이터를 비교
+        if pos >= start and target == cur.data:
+            return cur.data, pos
+
+        while cur.next:
+            pos += 1
+            cur = cur.next
+            if pos >= start and target == cur.data:
+                return cur.data, pos
+        return None,  None
+```
+
+파이썬의 리스트처럼 인덱싱을 통해 데이터에 한 번에 접근할 수 없고 매번 처음부터 순서대로 순회해야 한다는 점은 연결리스트의 단점이다.
