@@ -262,3 +262,190 @@ consist of two or more items that naturally belong together : Compound data
 ## HtDW With Compound Data
 
 ### HtDW With Compound Data pt. 1
+
+고양이는 오직 하나의 포지션만을 가지고 있었지만 소는 두개의 변하는 속성을 가지고 있다. position, direction -> 이것이 compound data가 필요한 이유이다.
+
+가장자리로 갔을 때 방향을 바꾸고 다른 길로 백한다.
+
+어떤 월드 프로그램에서, 첫 번째 단계는 분석하는 것 입니다.
+
+Constant
+
+- width
+- height
+- ctr-y
+- mts
+- cow images
+
+Changing
+
+- x coordinate of cow
+- x velocity of cow
+
+big-bang options
+
+- on-tick
+- to-draw
+- on-key
+
+```
+;; Constants:
+(define WIDTH 400)
+(deifne HEIGHT 200)
+
+(deinfe CTR-Y (/ HEIGHT 2))
+
+(define RCOW RCOW-IMAGE)
+(deifne LCOW LCOW-IMAGE)
+
+(define MTS (empty-scene WIDTH HIEGHT))
+
+;; Dtate definition;
+(define-struct cow (x dx))
+;; Cow is (make-cow Natural[0, WIDTH] Interger)
+;; iterp. (make-cow x dx) is a cow with x coordinate x and velocity dx
+;;          the x is the center of the cow
+;;          x is in screen coordinates (pixels)
+;;          dx is in pixels per tick
+(define C1 (make-cow 10 3)) ; at 10, moving left -> right
+(deifne C2 (make-cow 20 -4)) ; at 20, moving left <- right
+#;
+(define (fn-for-cow)
+  (...(cow-x c)    ;Natural[0, WIDTH]
+      (cow-dx c))) ;Interger
+
+;; Template rules used:
+;; - compound: 2 fileds
+
+;;Functions
+
+;; Cow -> Cow
+;; called to make the cow go for a walk, start with (main (make-cow))
+;; no tests for main function
+(define (main c)
+  (big-bang c
+            (on-tick next-cow)    ;Cow -> Cow
+            (on-draw render-cow)  ;Cow -> Image
+            (on-key handle-key))) ;Cow keyEvent -> Cow
+
+;; Cow -> Cow
+;; place appropricate cow image on MTS at (cow-x c) and CTR-Y
+;;!!!
+(define (render-cow) MTS)  ;stub
+
+;; Cow KeyEvent -> Cow
+;; reverse direction of cow travel when space bar is pressed
+;;!!!
+(define (handle-key c ke) c) ;stub
+
+```
+
+```
+(require 2htdp/image)
+(require 2htdp/universe)
+
+;;   cowabunga-starter.rkt  problem statement
+;;   cowabunga-v0.rkt       has constants
+;;   cowabunga-v1.rkt       has data definition
+;; > cowabunga-v2.rkt       has main function, wish list entries
+;;   cowabunga-v3.rkt       has next-cow
+;;   cowabunga-v4.rkt       has render-cow
+;;   cowabunga-v5.rkt       has handle-key
+
+;; A cow, meandering back and forth across the screen.
+
+
+
+
+;; =================
+;; Constants:
+
+(define WIDTH  400)
+(define HEIGHT 200)
+
+
+(define CTR-Y (/ HEIGHT 2))
+
+
+(define RCOW .)
+(define LCOW .)
+
+
+(define MTS (empty-scene WIDTH HEIGHT))
+
+
+
+
+;; =================
+;; Data definitions:
+
+(define-struct cow (x dx))
+;; Cow is (make-cow Natural[0, WIDTH] Integer)
+;; interp. (make-cow x dx) is a cow with x coordinate x and x velocity dx
+;;         the x is the center of the cow
+;;         x  is in screen coordinates (pixels)
+;;         dx is in pixels per tick
+;;
+(define C1 (make-cow 10  3)) ; at 10, moving left -> right
+(define C2 (make-cow 20 -4)) ; at 20, moving left <- right
+#;
+(define (fn-for-cow c)
+  (... (cow-x c)    ;Natural[0, WIDTH]
+       (cow-dx c))) ;Integer
+
+;; Template rules used:
+;;  - compound: 2 fields
+
+
+
+
+
+;; =================
+;; Functions:
+
+;; Cow -> Cow
+;; called to make the cow go for a walk; start with (main (make-cow 0 3))
+;; no tests for main function
+(define (main c)
+  (big-bang c
+            (on-tick next-cow)       ; Cow -> Cow
+            (to-draw render-cow)     ; Cow -> Image
+            (on-key  handle-key)))   ; Cow KeyEvent -> Cow
+
+
+
+;; Cow -> Cow
+;; increase cow x by dx; bounce off edges
+
+(check-expect (next-cow (make-cow 20 3)) (make-cow (+ 20 3) 3))   ;middle
+(check-expect (next-cow (make-cow 20 -3)) (make-cow (- 20 3) -3))
+
+(check-expect (next-cow (make-cow (- WIDTH 3) 3)) (make-cow WIDTH 3)) ;reaches edge
+(check-expect (next-cow (make-cow 3           -3)) (make-cow 0     -3))
+
+(check-expect (next-cow (make-cow (- WIDTH 2)  3)) (make-cow WIDTH -3)) ; tries to pass edge
+(check-expect (next-cow (make-cow 2           -3)) (make-cow 0      3))
+
+;(define (next-cow c) c)      ;stub
+
+;took template from cow
+(define (next-cow c)
+  (cond[(> (+ (cow-x c) (cow-dx c)) WIDTH)(make-cow WIDTH (- (cow-dx c)))]
+       [(< (+ (cow-x c) (cow-dx c)) 0)    (make-cow 0     (-   (cow-dx c)))]
+       [else
+        (make-cow (+ (cow-x c)(cow-dx c))
+              (cow-dx c))]))
+
+;; Cow -> Image
+;; place appropriate cow image on MTS at (cow-x c) and CTR-Y
+;; !!!
+(define (render-cow c) MTS)  ;stub
+
+
+;; Cow KeyEvent-> Cow
+;; reverse direction of cow travel when space bar is pressed
+;; !!!
+(define (handle-key c ke) c) ;stub
+
+
+```
