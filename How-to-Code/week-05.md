@@ -449,3 +449,233 @@ big-bang options
 
 
 ```
+
+### HtDW With Compound Data, pt 3
+
+```
+;; Cow -> Cow
+;; increase cow x by dx; bounce off edges
+(check-expect (next-cow (make-cow 20 3)) (make-cow (+ 20 3) 3))   ;middle
+(check-expect (next-cow (make-cow 20 -3)) (make-cow(- 20 3) -3))
+
+(check-expect (next-cow (make-cow (- WIDTH 3)  3)) (make-cow WIDTH  3)) ;reaches edge
+(check-expect (next-cow (make-cow 3           -3)) (make-cow 0     -3))
+
+(check-expect (next-cow (make-cow (- WIDTH 2)  3)) (make-cow WIDTH -3))  ;tries to pass edge
+(check-expect (next-cow (make-cow 2           -3)) (make-cow 0      3))
+
+;(define (next-cow c) c)      ;stub
+
+
+;took template from Cow
+(define (next-cow c)
+  (cond [(> (+ (cow-x c) (cow-dx c)) WIDTH) (make-cow WIDTH (- (cow-dx c)))]
+        [(< (+ (cow-x c) (cow-dx c)) 0)    (make-cow 0     (- (cow-dx c)))]
+        [else
+         (make-cow (+ (cow-x c) (cow-dx c))
+                   (cow-dx c))]))
+
+
+;; Cow -> Image
+;; place appropriate cow image on MTS at (cow-x c) and CTR-Y
+
+(define (render-cow c) MTS)  ;stub
+
+;; Cow KeyEvent-> Cow
+;; reverse direction of cow travel when space bar is pressed
+;; !!!
+(define (handle-key c ke) c) ;stub
+
+
+```
+
+### HtDW With Compound Data, pt 4
+
+render-cow는 두 가지를 받는다:
+
+- 어떤 cow image를 둘 건인가
+- MTS에서 어떤 위치에 놓을 것인가.
+
+일반적으로 우리는 두 가지를 받는 함수를 원하지 않습니다.
+각각 함수에 하나를 받길 원합니다.
+
+이 경우, 어떤 이미지를 사용할 지 선택하기 위해 헬퍼함수를 사용합니다.
+
+```
+;; Cow -> Image
+;; place appropriate cow image on MTS at (cow-x c) and CTR-Y
+(check-expect (render-cow (make-cow 99 3))
+              (place-image RCOW 99 CTR-Y MTS))
+(check-expect (render-cow (make-cow 33 -3))
+              (place-image LCOW 33 CTR-Y MTS))
+
+;(define (render-cow c) MTS)  ;stub
+
+;took template from Cow
+(define (render-cow c)
+  (place-image (choose-image c) (cow-x c) CTR-Y MTS))
+
+;;Cow -> Image
+;; produce RCOW or LCOW depending on direction cow is going; LCOW if dx = 0
+(check-expect (choose-image (make-cow 10  3)) RCOW)
+(check-expect (choose-image (make-cow 10 -3)) LCOW)
+(check-expect (choose-image (make-cow 10 0)) LCOW)
+
+;(define (choose-image c) RCOW) ;stub
+
+;took tempalte from Cow
+
+(define (choose-image c)
+  (if(> (cow-dx c) 0)
+     RCOW
+     LCOW))
+
+```
+
+### Problems
+
+#### Compound P9 - Water Balloons
+
+```
+; PROBLEM:
+;
+; In this problem, we will design an animation of throwing a water balloon.
+; When the program starts the water balloon should appear on the left side
+; of the screen, half-way up.  Since the balloon was thrown, it should
+; fly across the screen, rotating in a clockwise fashion. Pressing the
+; space key should cause the program to start over with the water balloon
+; back at the left side of the screen.
+;
+; NOTE: Please include your domain analysis at the top in a comment box.
+;
+; Use the following images to assist you with your domain analysis:
+;
+;
+; 1)
+; 2).
+; .
+; 3)
+; .
+; 4)
+;
+; .
+;
+;
+; Here is an image of the water balloon:
+; (define WATER-BALLOON.)
+;
+;
+;
+; NOTE: The rotate function wants an angle in degrees as its first
+; argument. By that it means Number[0, 360). As time goes by your balloon
+; may end up spinning more than once, for example, you may get to a point
+; where it has spun 362 degrees, which rotate won't accept.
+;
+; The solution to that is to use the modulo function as follows:
+;
+; (rotate (modulo ... 360) (text "hello" 30 "black"))
+;
+; where ... should be replaced by the number of degrees to rotate.
+;
+; NOTE: It is possible to design this program with simple atomic data,
+; but we would like you to use compound data.
+
+```
+
+```
+
+
+(require 2htdp/image)
+(require 2htdp/universe)
+
+;;Constant
+
+(define WIDTH 600)
+(define HEIGHT 200)
+(define LINEAR-SPEED 20)
+(define ANGULAR-SPEED 10)
+(define CTR-Y (/ HEIGHT 2))
+
+(define WATER-BALLOON .🎈)
+
+(define MTS (rectangle WIDTH HEIGHT "solid" "white"))
+
+;;Data definitions:
+(define-struct bs (x a))
+;; balloon state is (make-balloon Number Number)
+;; interp. the state of balloon
+;;         x is the x-cooridinate in pixel
+;;         a is the angle of rotation in degrees
+;;
+(define BS1 (make-bs 0 0))
+(define BS2 (make-bs 200 90))
+#;
+(define fn-for-balloon-state bs
+  (... (bs-x bs)
+       (bs-a bs)))
+
+;; Template rules used:
+;; - compound: 2 fields
+
+;; Functions:
+
+;; BoolloonState -> BlloonState
+;; run the animation start with inital balloon state
+;; start with (main (make-bs 0 0 ))
+;; no tests for main function
+
+(define (main bs)
+  (big-bang bs
+            (on-tick next-bs)      ;BalloonState -> BalloonState
+            (to-draw render-bs)    ;BalloonState -> Image
+            (on-key reset-bs)))  ;Balloon KeyEvent -> BalloonState
+
+;BalloonState -> BalloonState
+;; advanced by LINEAR-SPEED and ANGULAR-SPEED
+(check-expect (next-bs (make-bs 1 12))
+              (make-bs (+ LINEAR-SPEED 1) (- 12 ANGULAR-SPEED)))
+
+;(define (next-bs bs) bs) ;stub
+;Template from BalloonState
+(define (next-bs bs)
+  (make-bs (+ (bs-x bs) LINEAR-SPEED)
+           (- (bs-a bs) ANGULAR-SPEED)))
+
+;; BalloonState -> Image
+;; Produces the bs at height bs-x rotated (remainder bs-a 360) on the MTS
+(check-expect (render-bs (make-bs 1 12))
+              (place-image (rotate 12 WATER-BALLOON)
+                           1
+                           CTR-Y
+                           MTS))
+(check-expect (render-bs (make-bs 10 361))
+              (place-image (rotate 1 WATER-BALLOON)
+                           10
+                           CTR-Y
+                           MTS))
+;(define (render-bs bs) MTS)
+; Template from BalloonState
+(define (render-bs bs)
+  (place-image (rotate (modulo (bs-a bs) 360) WATER-BALLOON)
+               (bs-x bs)
+               CTR-Y
+               MTS))
+
+;; BalloonState keyEvent -> BalloonState
+;; reset program when space bar is pressed
+(check-expect (reset-bs (make-bs 1 12) " ")
+              (make-bs 0 0))
+(check-expect (reset-bs (make-bs 1 12) "left")
+              (make-bs 1 12))
+
+;(define (reset-bs bs key) bs)
+
+;;Template from KeyEvent
+(define (reset-bs bs key)
+  (cond [(key=? key " ") (make-bs 0 0)]
+        [else bs]))
+
+
+
+
+```
