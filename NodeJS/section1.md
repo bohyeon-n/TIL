@@ -1,5 +1,7 @@
 # Node.js 웹개발로 알아보는 백엔드 자바스크립트의 이해
 
+# 섹션 1. nodeJS + Express 웹서버 설정
+
 ## NPM
 
 `--save` 는 package.json에 명시해 두어 다음에 받을 때 쉽게 설치할 수 있도록 한다.
